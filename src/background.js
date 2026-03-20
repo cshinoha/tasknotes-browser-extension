@@ -3,8 +3,10 @@
  * Handles extension lifecycle, context menus, and keyboard shortcuts
  */
 
-// Import browser polyfill for Manifest V3 service worker
-importScripts('lib/browser-polyfill.min.js');
+// Load polyfill only in worker context (MV3); MV2 Firefox background page has browser API already.
+if (typeof importScripts === 'function') {
+  importScripts('lib/browser-polyfill.min.js');
+}
 
 // Inline API Client (avoiding importScripts issues)
 class TaskNotesAPI {
